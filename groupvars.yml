@@ -1,0 +1,64 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for init
+
+mounted_data_path: "{{ lookup('env', 'MOUNTED_DATA_PATH') }}"
+host_data_path: "{{ lookup('env', 'HOST_DATA_PATH') }}"
+
+host_git_ssh_key_path: "{{ lookup('env', 'HOST_GIT_PROVISIONING_KEY_FILE') }}"
+git_ssh_key_path: "{{ lookup('env', 'GIT_SSH_KEY_PATH') }}"
+provisioning_ssh_key_path: "{{ lookup('env', 'PROVISIONING_SSH_KEY_PATH') }}"
+provisioning_api_repo: "{{ lookup('env', 'GIT_PROVISIONING_API_REPO') }}"
+provisioning_api_ipv4: "{{ lookup('env', 'PROVISIONING_API_IPV4') }}"
+inventory_repo: "{{ lookup('env', 'GIT_INVENTORY_REPO') }}"
+provisioning_api_version: "{{ lookup('env', 'GIT_PROVISIONING_API_BRANCH') | default('main', true) }}"
+inventory_version: "{{ lookup('env', 'GIT_INVENTORY_BRANCH') | default('main', true) }}"
+
+# Docker network driver (ipvlan or macvlan)
+network_driver: "{{ lookup('env', 'NETWORK_DRIVER') }}"
+
+interface: "{{ lookup('env', 'NETWORK_INTERFACE') }}"
+
+# Concourse
+concourse_version: "{{ lookup('env', 'CONCOURSE_VERSION') }}"
+concourse_team: "{{ lookup('env', 'CONCOURSE_TEAM') }}"
+concourse_target: "{{ lookup('env', 'CONCOURSE_TARGET') }}"
+concourse_ipv4: "{{ lookup('env', 'CONCOURSE_IPV4') }}"
+concourse_db_ipv4: "{{ lookup('env', 'CONCOURSE_DB_IPV4') }}"
+concourse_user: "{{ lookup('env', 'CONCOURSE_USER') }}"
+concourse_password: "{{ lookup('env', 'CONCOURSE_PASSWORD') }}"
+concourse_url: "{{ lookup('env', 'CONCOURSE_URL') }}"
+concourse_commands_pipeline: "{{ lookup('env', 'CONCOURSE_COMMANDS_PIPELINE') }}"
+concourse_commands_resource: "{{ lookup('env', 'CONCOURSE_COMMANDS_RESOURCE') }}"
+concourse_oauth_client_id: "{{ lookup('env', 'CONCOURSE_OAUTH_CLIENT_ID') }}"
+concourse_oauth_client_secret: "{{ lookup('env', 'CONCOURSE_OAUTH_CLIENT_SECRET') }}"
+
+# IPVLAN driver settings
+ipvlan_subnet: "{{ lookup('env', 'IPVLAN_SUBNET') }}"
+ipvlan_gateway: "{{ lookup('env', 'IPVLAN_GATEWAY') }}"
+ipvlan_mode: "{{ lookup('env', 'IPVLAN_MODE') }}"
+
+# MACVLAN driver settings
+macvlan_subnet: "{{ lookup('env', 'MACVLAN_SUBNET') }}"
+macvlan_gateway: "{{ lookup('env', 'MACVLAN_GATEWAY') }}"
+macvlan_host_ip: "{{ lookup('env', 'MACVLAN_HOST_IP') }}"
+macvlan_mode: "{{ lookup('env', 'MACVLAN_MODE') }}"
+
+cloudflare_domain: "{{ lookup('env', 'CLOUDFLARE_DOMAIN') }}"
+cloudflare_api_key: "{{ lookup('env', 'CLOUDFLARE_API_KEY') }}"
+cloudflare_email: "{{ lookup('env', 'CLOUDFLARE_EMAIL') }}"
+zerossl_email: "{{ lookup('env', 'ZEROSSL_EMAIL') }}"
+zerossl_eab_kid: "{{ lookup('env', 'ZEROSSL_EAB_KID') }}"
+zerossl_eab_hmac_key: "{{ lookup('env', 'ZEROSSL_EAB_HMAC_KEY') }}"
+cert_authority: "{{ lookup('env', 'CERT_AUTHORITY') | default('zerossl', true) }}"
+
+nginx_ipv4: "{{ lookup('env', 'NGINX_IPV4') }}"
+nginx_acme_label: "{{ lookup('env', 'NGINX_ACME_LABEL') }}"
+
+server_api_ipv4: "{{ lookup('env', 'SERVER_API_IPV4') }}"
+
+vault_ipv4: "{{ lookup('env', 'VAULT_IPV4') }}"
+vault_url: "{{ lookup('env', 'VAULT_URL') }}"
+vault_acme_label: "{{ lookup('env', 'VAULT_ACME_LABEL') }}"
+
+registry_ipv4: "{{ lookup('env', 'REGISTRY_IPV4') }}"
