@@ -1,18 +1,22 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# defaults file for init
-
 mounted_data_path: "{{ lookup('env', 'MOUNTED_DATA_PATH') }}"
 host_data_path: "{{ lookup('env', 'HOST_DATA_PATH') }}"
 
 host_git_ssh_key_path: "{{ lookup('env', 'HOST_GIT_PROVISIONING_KEY_FILE') }}"
+droplet_ssh_key_path: "{{ lookup('env', 'HOST_DROPLET_KEY_FILE') }}"
 git_ssh_key_path: "{{ lookup('env', 'GIT_SSH_KEY_PATH') }}"
 provisioning_ssh_key_path: "{{ lookup('env', 'PROVISIONING_SSH_KEY_PATH') }}"
 provisioning_api_repo: "{{ lookup('env', 'GIT_PROVISIONING_API_REPO') }}"
 provisioning_api_ipv4: "{{ lookup('env', 'PROVISIONING_API_IPV4') }}"
+webhook_repo: "{{ lookup('env', 'GIT_WEBHOOK_REPO') }}"
+webhook_version: "{{ lookup('env', 'GIT_WEBHOOK_BRANCH') | default('main', true) }}"
 inventory_repo: "{{ lookup('env', 'GIT_INVENTORY_REPO') }}"
 provisioning_api_version: "{{ lookup('env', 'GIT_PROVISIONING_API_BRANCH') | default('main', true) }}"
 inventory_version: "{{ lookup('env', 'GIT_INVENTORY_BRANCH') | default('main', true) }}"
+groupvars_repo: "{{ lookup('env', 'GIT_GROUPVARS_REPO') }}"
+groupvars_version: "{{ lookup('env', 'GIT_GROUPVARS_BRANCH') | default('main', true) }}"
+groupvars_git_user_name: "{{ lookup('env', 'GROUPVARS_GIT_USER_NAME') }}"
+groupvars_git_user_email: "{{ lookup('env', 'GROUPVARS_GIT_USER_EMAIL') }}"
 
 # Docker network driver (ipvlan or macvlan)
 network_driver: "{{ lookup('env', 'NETWORK_DRIVER') }}"
@@ -56,9 +60,27 @@ nginx_ipv4: "{{ lookup('env', 'NGINX_IPV4') }}"
 nginx_acme_label: "{{ lookup('env', 'NGINX_ACME_LABEL') }}"
 
 server_api_ipv4: "{{ lookup('env', 'SERVER_API_IPV4') }}"
+webhook_ipv4: "{{ lookup('env', 'WEBHOOK_IPV4') }}"
 
 vault_ipv4: "{{ lookup('env', 'VAULT_IPV4') }}"
 vault_url: "{{ lookup('env', 'VAULT_URL') }}"
+vault_bootstrap_url: "http://127.0.0.1:8200"
 vault_acme_label: "{{ lookup('env', 'VAULT_ACME_LABEL') }}"
 
 registry_ipv4: "{{ lookup('env', 'REGISTRY_IPV4') }}"
+
+# Kernel modules required for Concourse containerd/garden networking
+concourse_worker_kernel_modules:
+  - overlay
+  - br_netfilter
+  - x_tables
+  - ip_tables
+  - iptable_filter
+  - iptable_nat
+  - nf_nat
+
+# Postgres settings
+postgres_user: "osadmin"
+postgres_password: "{{ lookup('env', 'POSTGRES_PASSWORD') }}"
+postgres_db: "osdb"
+postgres_ipv4: "10.0.2.121"
