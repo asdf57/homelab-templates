@@ -64,7 +64,7 @@ webhook_ipv4: "{{ lookup('env', 'WEBHOOK_IPV4') }}"
 
 vault_ipv4: "{{ lookup('env', 'VAULT_IPV4') }}"
 vault_url: "{{ lookup('env', 'VAULT_URL') }}"
-vault_bootstrap_url: "http://127.0.0.1:8200"
+vault_bootstrap_url: "http://{{ vault_ipv4 }}:8200"
 vault_acme_label: "{{ lookup('env', 'VAULT_ACME_LABEL') }}"
 
 registry_ipv4: "{{ lookup('env', 'REGISTRY_IPV4') }}"
