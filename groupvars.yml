@@ -71,7 +71,7 @@ webhook_ipv4: "{{ lookup('env', 'WEBHOOK_IPV4') }}"
 
 vault_ipv4: "{{ lookup('env', 'VAULT_IPV4') }}"
 vault_url: "{{ lookup('env', 'VAULT_URL') }}"
-vault_bootstrap_url: "http://{{ vault_ipv4 }}:8200"
+vault_bootstrap_url: "http://{{ lookup('env', 'VAULT_IPV4') }}:8200"
 vault_acme_label: "{{ lookup('env', 'VAULT_ACME_LABEL') }}"
 vault_api_fqdn: "{{ lookup('env', 'VAULT_API_FQDN') }}"
 
@@ -80,7 +80,7 @@ registry_fqdn: "{{ lookup('env', 'REGISTRY_FQDN') }}"
 registry_ipv4: "{{ lookup('env', 'REGISTRY_IPV4') }}"
 prov_controller_ipv4: "{{ lookup('env', 'PROV_CONTROLLER_IPV4') }}"
 prov_controller_fqdn: "{{ lookup('env', 'PROV_CONTROLLER_FQDN') }}"
-prov_controller_api_url: "http://{{ prov_controller_ipv4 }}:8001/api/v1"
+prov_controller_api_url: "http://{{ lookup('env', 'PROV_CONTROLLER_IPV4') }}:8001/api/v1"
 
 # Kernel modules required for Concourse containerd/garden networking
 concourse_worker_kernel_modules:
