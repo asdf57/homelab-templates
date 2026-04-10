@@ -26,7 +26,6 @@ primary_router_role: "{{ lookup('env', 'PRIMARY_ROUTER_ROLE') | default('primary
 primary_router_management_ip: "{{ lookup('env', 'PRIMARY_ROUTER_MANAGEMENT_IP') }}"
 primary_router_api_port: "{{ lookup('env', 'PRIMARY_ROUTER_API_PORT') | default('8729', true) | int }}"
 primary_router_api_username: "{{ lookup('env', 'PRIMARY_ROUTER_API_USERNAME') }}"
-primary_router_api_password: "{{ lookup('env', 'PRIMARY_ROUTER_API_PASSWORD') }}"
 
 # Docker network driver (ipvlan or macvlan)
 network_driver: "{{ lookup('env', 'NETWORK_DRIVER') }}"
@@ -40,12 +39,10 @@ concourse_target: "{{ lookup('env', 'CONCOURSE_TARGET') }}"
 concourse_ipv4: "{{ lookup('env', 'CONCOURSE_IPV4') }}"
 concourse_db_ipv4: "{{ lookup('env', 'CONCOURSE_DB_IPV4') }}"
 concourse_user: "{{ lookup('env', 'CONCOURSE_USER') }}"
-concourse_password: "{{ lookup('env', 'CONCOURSE_PASSWORD') }}"
 concourse_url: "{{ lookup('env', 'CONCOURSE_URL') }}"
 concourse_commands_pipeline: "{{ lookup('env', 'CONCOURSE_COMMANDS_PIPELINE') }}"
 concourse_commands_resource: "{{ lookup('env', 'CONCOURSE_COMMANDS_RESOURCE') }}"
 concourse_oauth_client_id: "{{ lookup('env', 'CONCOURSE_OAUTH_CLIENT_ID') }}"
-concourse_oauth_client_secret: "{{ lookup('env', 'CONCOURSE_OAUTH_CLIENT_SECRET') }}"
 
 # IPVLAN driver settings
 ipvlan_subnet: "{{ lookup('env', 'IPVLAN_SUBNET') }}"
@@ -59,11 +56,8 @@ macvlan_host_ip: "{{ lookup('env', 'MACVLAN_HOST_IP') }}"
 macvlan_mode: "{{ lookup('env', 'MACVLAN_MODE') }}"
 
 cloudflare_domain: "{{ lookup('env', 'CLOUDFLARE_DOMAIN') }}"
-cloudflare_api_key: "{{ lookup('env', 'CLOUDFLARE_API_KEY') }}"
 cloudflare_email: "{{ lookup('env', 'CLOUDFLARE_EMAIL') }}"
 zerossl_email: "{{ lookup('env', 'ZEROSSL_EMAIL') }}"
-zerossl_eab_kid: "{{ lookup('env', 'ZEROSSL_EAB_KID') }}"
-zerossl_eab_hmac_key: "{{ lookup('env', 'ZEROSSL_EAB_HMAC_KEY') }}"
 cert_authority: "{{ lookup('env', 'CERT_AUTHORITY') | default('zerossl', true) }}"
 
 nginx_ipv4: "{{ lookup('env', 'NGINX_IPV4') }}"
@@ -87,6 +81,15 @@ prov_controller_ipv4: "{{ lookup('env', 'PROV_CONTROLLER_IPV4') }}"
 prov_controller_fqdn: "{{ lookup('env', 'PROV_CONTROLLER_FQDN') }}"
 prov_controller_api_url: "http://{{ lookup('env', 'PROV_CONTROLLER_IPV4') }}:8001/api/v1"
 
+vault_secret_paths:
+  primary_router_api_password: "kv2/router/primary/api_password"
+  concourse_password: "kv2/concourse/local_user/password"
+  concourse_oauth_client_secret: "kv2/concourse/oauth/client_secret"
+  cloudflare_api_key: "kv2/cloudflare/api_key"
+  zerossl_eab_kid: "kv2/zerossl/eab/kid"
+  zerossl_eab_hmac_key: "kv2/zerossl/eab/hmac_key"
+  postgres_password: "kv2/postgres/osdb/password"
+
 # Kernel modules required for Concourse containerd/garden networking
 concourse_worker_kernel_modules:
   - overlay
@@ -99,6 +102,5 @@ concourse_worker_kernel_modules:
 
 # Postgres settings
 postgres_user: "osadmin"
-postgres_password: "{{ lookup('env', 'POSTGRES_PASSWORD') }}"
 postgres_db: "osdb"
 postgres_ipv4: "10.0.2.121"
