@@ -24,7 +24,7 @@ groupvars_git_user_email: "{{ lookup('env', 'GROUPVARS_GIT_USER_EMAIL') }}"
 primary_router_name: "{{ lookup('env', 'PRIMARY_ROUTER_NAME') }}"
 primary_router_role: "{{ lookup('env', 'PRIMARY_ROUTER_ROLE') | default('primary', true) }}"
 primary_router_management_ip: "{{ lookup('env', 'PRIMARY_ROUTER_MANAGEMENT_IP') }}"
-primary_router_api_port: "{{ lookup('env', 'PRIMARY_ROUTER_API_PORT') | default('8729', true) | int }}"
+primary_router_api_port: "{{ lookup('env', 'PRIMARY_ROUTER_API_PORT') | default('8728', true) | int }}"
 primary_router_api_username: "{{ lookup('env', 'PRIMARY_ROUTER_API_USERNAME') }}"
 
 # Docker network driver (ipvlan or macvlan)
